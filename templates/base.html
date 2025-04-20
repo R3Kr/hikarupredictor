@@ -1,0 +1,33 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hikaru Predicter</title>
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+</head>
+<body>
+    {% block content %}
+        <!-- Child templates will insert content here -->
+    {% endblock %}
+    <form method="post" action="/predict">
+        <label for="opponentRating">Opponent rating:</label>
+        <input type="number" id="opponentRating" name="opponentRating" value={{opponentRating}} required>
+        
+        <label for="gameTimeClass">Time control:</label>
+        <select id="gameTimeClass" name="gameTimeClass" required>
+            <option name="Blitz" value="blitz" {%if gameTimeClass == 'blitz'%} selected {% endif %}>Blitz</option>
+            <option name="Bullet"value="bullet"{%if gameTimeClass == 'bullet'%} selected {% endif %}>Bullet</option>
+            <option name="Rapid"value="rapid"{%if gameTimeClass == 'rapid'%} selected {% endif %}>Rapid</option>
+        </select>
+
+
+        <label for="isTournament">Tournament:</label>
+        <input type="checkbox" id="isTournament" name="isTournament"{%if isTournament %} checked {% endif %}>
+        <br>
+        <br>
+        
+        <button type="submit">Predict</button>
+    </form>
+</form>
+</body>
+</html>

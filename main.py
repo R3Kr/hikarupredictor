@@ -38,7 +38,7 @@ async def read_root(request: Request):
 
 @app.post("/predict", response_class=HTMLResponse)
 async def prediciton(request: Request, opponentRating: int = Form(...), gameTimeClass: TimeControls  = Form(...), isTournament: bool = Form(False)):
-    input_df = pd.DataFrame([{gameTimeClass.value: 1, "opponentRating": opponentRating, "isTournament": isTournament}], columns=feature_names)
+    input_df = pd.DataFrame([{gameTimeClass.value: 1, "opponentRating": opponentRating, "isTournament": isTournament}], columns=feature_names).fillna(0)
     probs = model.predict_proba(input_df)[0]
     output = {}
     for i in range(len(probs)):
